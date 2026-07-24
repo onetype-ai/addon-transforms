@@ -1,0 +1,11 @@
+{
+    "name": "@onetype/addon-transforms",
+    "version": "0.1.0",
+    "type": "module",
+    "imports": {
+        "#transforms/*": "./*"
+    },
+    "exports": {
+        "./*": "./*"
+    }
+}
