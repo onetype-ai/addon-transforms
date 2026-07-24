@@ -3,5 +3,7 @@
 import transforms from '#transforms/back/addon.js';
 
 import '#transforms/back/items/onetype/assets/transforms.js';
+import '#transforms/back/items/canon/patterns/transforms.js';
+import '#transforms/back/items/canon/placements/transforms.js';
 
 export default transforms;
