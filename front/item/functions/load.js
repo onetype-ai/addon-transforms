@@ -2,13 +2,6 @@
 
 transforms.Fn('item.load', function(item)
 {
-    if(!transforms.StoreGet('loaded'))
-    {
-        transforms.StoreSet('loaded', {});
-    }
-
-    const loaded = transforms.StoreGet('loaded');
-
     this.promise = (url, element) =>
     {
         loaded[url] = new Promise((resolve, reject) =>
@@ -54,6 +47,13 @@ transforms.Fn('item.load', function(item)
 
         return this.promise(url, element);
     };
+
+    if(!transforms.StoreGet('loaded'))
+    {
+        transforms.StoreSet('loaded', {});
+    }
+
+    const loaded = transforms.StoreGet('loaded');
 
     const scripts = item.Get('js').map((url) => this.script(url));
     const styles = item.Get('css').map((url) => this.style(url));
