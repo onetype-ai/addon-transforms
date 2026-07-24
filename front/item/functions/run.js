@@ -1,3 +1,5 @@
+// This file is part of OneType. Created and led by Dejan Tomic <hi@iamdejan.com>, onetype.ai
+
 transforms.Fn('item.run', function(item, node, data = null)
 {
     this.scroll = () => ({

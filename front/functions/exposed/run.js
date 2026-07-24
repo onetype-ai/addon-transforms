@@ -1,3 +1,5 @@
+// This file is part of OneType. Created and led by Dejan Tomic <hi@iamdejan.com>, onetype.ai
+
 transforms.FnExpose('run', function(id, node, data = null)
 {
     const item = transforms.ItemGet(id);
