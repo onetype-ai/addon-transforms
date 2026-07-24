@@ -1,13 +1,12 @@
 // This file is part of OneType. Created and led by Dejan Tomic <hi@iamdejan.com>, co-authored by Stefan Pakic, onetype.ai
 
-onetype.AddonReady('directives', (directives) =>
+onetype.AddonReady('directives', function(directives)
 {
     directives.ItemAdd({
         id: 'ot-transform',
         icon: 'sync_alt',
         name: 'Transform',
         description: 'Runs a transform on the node when it renders',
-        category: 'visual',
         trigger: 'node',
         order: 668,
         strict: false,
@@ -24,7 +23,7 @@ onetype.AddonReady('directives', (directives) =>
                 description: 'Configuration overlaid over the ott attributes, validated through the same defines.'
             }
         },
-        code: function(data, item, compile, node)
+        code: function(data, compile, node)
         {
             if(node.tagName.toLowerCase() !== 'ot-transform')
             {
