@@ -1,6 +1,6 @@
 # Transforms
 
-Transforms puts behavior and effects on plain markup. A node opts in with a single `ot` attribute naming a transform; the engine finds it, loads what it needs, reads its typed configuration from `ot-` attributes and drives its lifecycle in the browser. No components, no wrappers: the markup stays markup.
+Transforms puts behavior and effects on plain markup. A node opts in with a single `ott` attribute naming a transform; the engine finds it, loads what it needs, reads its typed configuration from `ott-` attributes and drives its lifecycle in the browser. No components, no wrappers: the markup stays markup.
 
 - Package: `@onetype/addon-transforms`, slug `onetype/addon/transforms`
 - Depends on: nothing
@@ -9,10 +9,10 @@ Transforms puts behavior and effects on plain markup. A node opts in with a sing
 ## Use a transform
 
 ```html
-<div ot="fade" ot-duration="500" ot-label="hello"></div>
+<div ott="fade" ott-duration="500" ott-label="hello"></div>
 ```
 
-That is the whole integration surface. The engine initializes the node as soon as it exists, whether it was in the document from the start or added later. After initialization the markup is clean: `ot` and every `ot-` attribute are gone.
+That is the whole integration surface. The engine initializes the node as soon as it exists, whether it was in the document from the start or added later. After initialization the markup is clean: `ott` and every `ott-` attribute are gone.
 
 ## Define a transform
 
@@ -44,11 +44,11 @@ Field reference:
 
 | Field | Type | Meaning |
 | --- | --- | --- |
-| `id` | string | The value the `ot` attribute uses. |
+| `id` | string | The value the `ott` attribute uses. |
 | `name`, `description`, `icon`, `tags`, `metadata` | | Presentation and free tags for whoever browses the transforms. |
 | `js` | array of urls | Scripts loaded before the first run. Each url loads once per page. |
 | `css` | array of urls | Stylesheets loaded before the first run. |
-| `config` | defines | One define per `ot-` attribute the transform reads. Typed, with defaults. |
+| `config` | defines | One define per `ott-` attribute the transform reads. Typed, with defaults. |
 | `code` | function | Runs once when the node initializes. |
 | `visible` | function | Runs when the node enters or leaves the viewport. |
 | `resize` | function | Runs when the node resizes. |
@@ -59,10 +59,10 @@ Field reference:
 
 ## Read configuration from attributes
 
-Every key in `config` maps to an `ot-` attribute. The engine reads the attribute, evaluates non string types as expressions, validates the result against the define, removes the attribute, and fills absences from the schema:
+Every key in `config` maps to an `ott-` attribute. The engine reads the attribute, evaluates non string types as expressions, validates the result against the define, removes the attribute, and fills absences from the schema:
 
 ```html
-<div ot="counter" ot-start="10" ot-steps="[1, 5, 10]" ot-live="true"></div>
+<div ott="counter" ott-start="10" ott-steps="[1, 5, 10]" ott-live="true"></div>
 ```
 
 ```js
@@ -124,11 +124,11 @@ transforms.run('fade', node);                       // reads configuration from 
 transforms.run('fade', node, { duration: 100 });    // skips the attributes, uses this data
 ```
 
-An unknown id does nothing. A node initializes exactly once: the engine guards with a pending set while loading and an `ot-init` attribute during setup, so scans, mutations and manual runs never double fire.
+An unknown id does nothing. A node initializes exactly once: the engine guards with a pending set while loading and an `ott-init` attribute during setup, so scans, mutations and manual runs never double fire.
 
 ## The watcher
 
-On `onetype.document.ready` the engine scans the document for `[ot]` nodes and starts a MutationObserver. Markup added later, whether appended directly or nested inside an added subtree, initializes the same way. Nothing else to call.
+On `onetype.document.ready` the engine scans the document for `[ott]` nodes and starts a MutationObserver. Markup added later, whether appended directly or nested inside an added subtree, initializes the same way. Nothing else to call.
 
 ## Guarantees
 

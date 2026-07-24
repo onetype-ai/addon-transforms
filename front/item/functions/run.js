@@ -82,14 +82,14 @@ transforms.Fn('item.run', function(item, node, data = null)
     {
         requestAnimationFrame(() =>
         {
-            node.removeAttribute('ot');
-            node.removeAttribute('ot-init');
+            node.removeAttribute('ott');
+            node.removeAttribute('ott-init');
         });
     };
 
     this.start = () =>
     {
-        node.setAttribute('ot-init', '');
+        node.setAttribute('ott-init', '');
 
         const context = this.state();
 

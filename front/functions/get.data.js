@@ -20,14 +20,14 @@ transforms.Fn('get.data', function(config, node)
 
     this.read = (name, definition) =>
     {
-        const raw = node.getAttribute('ot-' + name);
+        const raw = node.getAttribute('ott-' + name);
 
         if(raw === null)
         {
             return raw;
         }
 
-        node.removeAttribute('ot-' + name);
+        node.removeAttribute('ott-' + name);
 
         return definition.type === 'string' ? raw : this.evaluate(raw);
     };

@@ -4,9 +4,9 @@ transforms.Fn('do.watch', function()
 
     this.process = (node) =>
     {
-        const id = node.getAttribute('ot');
+        const id = node.getAttribute('ott');
 
-        if(!id || node.hasAttribute('ot-init') || this.pending.has(node))
+        if(!id || node.hasAttribute('ott-init') || this.pending.has(node))
         {
             return;
         }
@@ -17,7 +17,7 @@ transforms.Fn('do.watch', function()
 
     this.scan = () =>
     {
-        document.querySelectorAll('[ot]').forEach((node) => this.process(node));
+        document.querySelectorAll('[ott]').forEach((node) => this.process(node));
     };
 
     this.added = (node) =>
@@ -27,12 +27,12 @@ transforms.Fn('do.watch', function()
             return;
         }
 
-        if(node.hasAttribute('ot'))
+        if(node.hasAttribute('ott'))
         {
             this.process(node);
         }
 
-        node.querySelectorAll('[ot]').forEach((child) => this.process(child));
+        node.querySelectorAll('[ott]').forEach((child) => this.process(child));
     };
 
     this.observe = () =>
