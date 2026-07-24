@@ -120,9 +120,21 @@ Assets load before the first `code` call and once per page no matter how many no
 ## Run programmatically
 
 ```js
-transforms.run('fade', node);                       // reads configuration from the node attributes
-transforms.run('fade', node, { duration: 100 });    // skips the attributes, uses this data
+transforms.run('fade', node);                       // reads configuration from the ott attributes
+transforms.run('fade', node, { duration: 100 });    // reads the attributes, then overlays this data
 ```
+
+Passed data overlays the attributes and validates through the same defines: an unknown key or a wrong type fails loudly. Attributes are always consumed, so the markup ends clean either way.
+
+## The ot-transform directive
+
+When the directives addon is present (`supports: onetype/addon/directives`), transforms also run from rendered markup with reactive data:
+
+```html
+<ot-transform use="swiper" ott-loop="true" :data="{ speed: settings.speed }"></ot-transform>
+```
+
+Attributes: `use` (required, the transform id) and `data` (overlaid over the `ott-` attributes, validated through the same defines). Static configuration rides the `ott-` attributes, bound values ride `:data`, and the two merge with `data` winning per key.
 
 An unknown id does nothing. A node initializes exactly once: the engine guards with a pending set while loading and an `ott-init` attribute during setup, so scans, mutations and manual runs never double fire.
 

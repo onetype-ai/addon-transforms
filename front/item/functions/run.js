@@ -100,10 +100,19 @@ transforms.Fn('item.run', function(item, node, data = null)
         this.finish();
     };
 
-    if(data === null)
+    this.merge = (provided) =>
     {
-        data = transforms.Fn('get.data', item.Get('config'), node);
-    }
+        const read = transforms.Fn('get.data', item.Get('config'), node);
+
+        Object.entries(provided).forEach(([name, value]) =>
+        {
+            read[name] = onetype.DataDefineOne(value, item.Get('config')[name]);
+        });
+
+        return read;
+    };
+
+    data = data === null ? transforms.Fn('get.data', item.Get('config'), node) : this.merge(data);
 
     item.Fn('load').then(() =>
     {
