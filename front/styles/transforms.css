@@ -1,4 +1,9 @@
-[ot]
+[ott]
 {
-	opacity: 0;
+    opacity: 0;
+}
+
+ot-transform
+{
+    display: block;
 }

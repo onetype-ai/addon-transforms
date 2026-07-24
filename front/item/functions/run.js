@@ -63,7 +63,24 @@ transforms.Fn('item.run', function(item, node, data = null)
         onetype.ObserverUnclick(node);
     };
 
-    this.release = (context) =>
+    this.watch = (context) =>
+    {
+        if(!item.Get('structure'))
+        {
+            return null;
+        }
+
+        const observer = new MutationObserver(() => item.Get('structure').call(context, data, node, item));
+
+        observer.observe(node, {
+            childList: true,
+            subtree: true
+        });
+
+        return observer;
+    };
+
+    this.release = (context, watcher) =>
     {
         const listener = onetype.emitters.catch('onetype.dom.remove', (removed) =>
         {
@@ -73,6 +90,7 @@ transforms.Fn('item.run', function(item, node, data = null)
             }
 
             onetype.emitters.off('onetype.dom.remove', listener);
+            watcher && watcher.disconnect();
             this.unobserve();
             item.Get('destroy') && item.Get('destroy').call(context, data, node, item);
         });
@@ -92,11 +110,12 @@ transforms.Fn('item.run', function(item, node, data = null)
         node.setAttribute('ott-init', '');
 
         const context = this.state();
+        const watcher = this.watch(context);
 
-        item.Get('code').call(context, data, node, item);
+        item.Get('code') && item.Get('code').call(context, data, node, item);
         this.observe(context);
         this.track(context);
-        this.release(context);
+        this.release(context, watcher);
         this.finish();
     };
 
@@ -117,5 +136,5 @@ transforms.Fn('item.run', function(item, node, data = null)
     item.Fn('load').then(() =>
     {
         document.contains(node) && this.start();
-    });
+    }).catch((error) => error);
 });
