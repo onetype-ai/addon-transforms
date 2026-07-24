@@ -1,0 +1,10 @@
+{
+    "type": "addon",
+    "slug": "onetype/addon/transforms",
+    "name": "Transforms",
+    "description": "Runs client-side transform items on elements marked with the ot attribute, loading their scripts and styles and invoking their lifecycle functions in the browser.",
+    "icon": "sync_alt",
+    "color": "rgba(129, 140, 248, 1)",
+    "status": "enabled",
+    "depends": []
+}
