@@ -107,8 +107,6 @@ transforms.Fn('item.run', function(item, node, data = null)
 
     this.start = () =>
     {
-        node.setAttribute('ott-init', '');
-
         const context = this.state();
         const watcher = this.watch(context);
 
@@ -131,10 +129,27 @@ transforms.Fn('item.run', function(item, node, data = null)
         return read;
     };
 
+    if(!transforms.StoreGet('ran'))
+    {
+        transforms.StoreSet('ran', new WeakSet());
+    }
+
+    if(node.hasAttribute('ott-init') || transforms.StoreGet('ran').has(node))
+    {
+        return;
+    }
+
+    transforms.StoreGet('ran').add(node);
+    node.setAttribute('ott-init', '');
     data = data === null ? transforms.Fn('get.data', item.Get('config'), node) : this.merge(data);
 
     item.Fn('load').then(() =>
     {
         document.contains(node) && this.start();
-    }).catch((error) => error);
+    }).catch(() =>
+    {
+        transforms.StoreGet('ran').delete(node);
+        node.removeAttribute('ott');
+        node.removeAttribute('ott-init');
+    });
 });

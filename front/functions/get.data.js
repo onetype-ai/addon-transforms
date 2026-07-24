@@ -36,8 +36,7 @@ transforms.Fn('get.data', function(config, node)
     {
         Object.entries(config).forEach(([name, definition]) =>
         {
-            name = name.toLowerCase();
-            data[name] = onetype.DataDefineOne(this.read(name, definition), definition);
+            data[name] = onetype.DataDefineOne(this.read(name.toLowerCase(), definition), definition);
         });
     };
 
