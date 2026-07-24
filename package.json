@@ -6,6 +6,8 @@
         "#transforms/*": "./*"
     },
     "exports": {
+        ".": "./back/load.js",
         "./*": "./*"
-    }
+    },
+    "main": "./back/load.js"
 }
