@@ -14,7 +14,11 @@ transforms.Fn('item.load', function(item)
         loaded[url] = new Promise((resolve, reject) =>
         {
             element.onload = resolve;
-            element.onerror = () => reject(onetype.Error(500, 'The url failed to load: :url:.', { url }, true));
+            element.onerror = () =>
+            {
+                reject(onetype.Error(500, 'The url failed to load: :url:.', { url }, true));
+            };
+
             document.head.appendChild(element);
         });
 
