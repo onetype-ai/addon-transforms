@@ -13,4 +13,4 @@ transforms.FnExpose('run', function(id, node, data = null)
     }
 
     item.Fn('run', node, data);
-});
+}, 'Runs a registered transform on the node handed over, reading its configuration from the markup.');

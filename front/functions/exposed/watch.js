@@ -65,4 +65,4 @@ transforms.FnExpose('watch', function()
     }
 
     document.addEventListener('DOMContentLoaded', () => this.start());
-});
+}, 'Watches the document, transforming the nodes standing and the ones that arrive after.');
