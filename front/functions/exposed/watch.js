@@ -1,6 +1,6 @@
 // This file is part of OneType. Created and led by Dejan Tomic <hi@iamdejan.com>, co-authored by Stefan Pakic, onetype.ai
 
-transforms.Fn('do.watch', function()
+transforms.FnExpose('watch', function()
 {
     this.pending = new WeakSet();
 
@@ -59,12 +59,10 @@ transforms.Fn('do.watch', function()
         this.observe();
     };
 
-    if(document.readyState === 'loading')
+    if(document.readyState !== 'loading')
     {
-        document.addEventListener('DOMContentLoaded', () => this.start());
-
-        return;
+        return this.start();
     }
 
-    this.start();
+    document.addEventListener('DOMContentLoaded', () => this.start());
 });

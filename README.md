@@ -142,6 +142,14 @@ An unknown id does nothing. A node initializes exactly once: the engine guards w
 
 On `onetype.document.ready` the engine scans the document for `[ott]` nodes and starts a MutationObserver. Markup added later, whether appended directly or nested inside an added subtree, initializes the same way. Nothing else to call.
 
+A page that never fires that event — a static file, a CDN script, a document built by hand — starts the watcher itself:
+
+```js
+transforms.watch();
+```
+
+It scans what is already there and keeps watching what arrives after, exactly as the listener does. Called while the document is still parsing it waits for `DOMContentLoaded` first. Calling it twice is harmless: a node that already carries `ott-init` is left alone.
+
 ## Guarantees
 
 - Configuration is validated through the same define system as everything else in OneType: typed, sealed, defaults from the schema.
