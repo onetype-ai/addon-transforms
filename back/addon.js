@@ -2,6 +2,8 @@
 
 const transforms = onetype.Addon('transforms', (addon) =>
 {
+    addon.Description('Declares the shape a transform takes, the config it reads and the moments of the node it answers.');
+
     addon.Field('id', {
         type: 'string',
         description: 'Unique transform id, the ot attribute names it on the node.'
