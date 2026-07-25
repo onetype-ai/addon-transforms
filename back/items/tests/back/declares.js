@@ -3,7 +3,7 @@
 onetype.AddonReady('tests.back', (tests) =>
 {
     tests.Item({
-        id: 'back/declares',
+        id: 'transforms:back/declares',
         addon: 'transforms',
         description: 'The addon declares the shape a transform takes, holds its lifecycle callbacks and hands its front folder to assets.',
         callback: function({ assert })

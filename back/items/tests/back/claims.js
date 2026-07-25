@@ -3,7 +3,7 @@
 onetype.AddonReady('tests.back', (tests) =>
 {
     tests.Item({
-        id: 'back/claims',
+        id: 'transforms:back/claims',
         addon: 'transforms',
         description: 'The addon hands canon the pattern a transform file follows and the folder it registers in, so a stray one is caught.',
         callback: function({ assert })

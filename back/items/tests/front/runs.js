@@ -3,7 +3,7 @@
 onetype.AddonReady('tests.front', (tests) =>
 {
     tests.Item({
-        id: 'front/runs',
+        id: 'transforms:front/runs',
         addon: 'transforms',
         description: 'A transform reaches the node its ott attribute names, reads its typed configuration, runs once and leaves the markup clean.',
         callback: async function({ mount, run, settle, assert })
